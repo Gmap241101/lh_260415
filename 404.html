@@ -1,75 +1,187 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 — 페이지를 찾을 수 없습니다</title>
-    <style>
-        /* 기본 페이지 리셋 및 폰트 설정 */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #ffffff;
-            color: #1a1a1a;
-        }
-
-        /* 메인 콘텐츠 영역 중앙 정렬 */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        /* 404 메세지 스타일 */
-        h1 {
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin: 0;
-            color: #000000;
-        }
-
-        /* 하단 배너(푸터) 스타일 */
-        footer {
-            padding: 20px;
-            text-align: center;
-            font-size: 0.85rem;
-            color: #888888;
-        }
-
-        /* 하단 링크 스타일 */
-        footer a {
-            color: inherit;
-            text-decoration: none;
-            display: inline-block;
-            line-height: 1.4;
-        }
-
-        footer a:hover {
-            text-decoration: underline;
-            color: #333333;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 - 페이지를 찾을 수 없습니다</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      min-height: 100vh;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      color: #000000;
+    }
+    /* 배경 광원 */
+    .bg-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 107, 0, 0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    /* 본문 컨테이너 */
+    .container {
+      position: relative;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .container.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* CI 로고마크 */
+    .logo {
+      display: block;
+      width: 48px;
+      height: 38px;
+      margin: 0 auto 1.5rem;
+    }
+    /* 구분선 */
+    .divider {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, #FF6B00, transparent);
+      margin: 0 auto 2.5rem;
+    }
+    /* 404 숫자 */
+    .error-code {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(6rem, 20vw, 10rem);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin: 0 0 1.25rem;
+      background: linear-gradient(135deg, #FF6B00 30%, #e65300 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    /* 메인 메시지 */
+    .title-ko {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 500;
+      color: #000000;
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    /* 영문 서브타이틀 */
+    .title-en {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(0.75rem, 2vw, 0.875rem);
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.35);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 1.25rem;
+    }
+    /* 서브 메시지 */
+    .subtitle {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: rgba(0, 0, 0, 0.6);
+      line-height: 1.7;
+      margin: 0 0 3rem;
+    }
+    /* 홈으로 버튼 */
+    .btn-home {
+      display: inline-block;
+      padding: 0.75rem 2.25rem;
+      background: transparent;
+      color: #FF6B00;
+      border: 1px solid #FF6B00;
+      border-radius: 4px;
+      font-family: 'Inter', 'Noto Sans KR', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: background 0.25s ease, color 0.25s ease;
+    }
+    .btn-home:hover {
+      background: linear-gradient(135deg, #FF6B00, #e65300);
+      color: #ffffff;
+    }
+    /* 하단 워터마크 */
+    .watermark {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Inter', monospace;
+      font-size: 0.7rem;
+      color: rgba(0, 0, 0, 0.12);
+      letter-spacing: 0.15em;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 1s ease 0.8s;
+    }
+    .watermark.visible {
+      opacity: 1;
+    }
+  </style>
 </head>
 <body>
-
-    <main>
-        <h1>404 — 페이지를 찾을 수 없습니다</h1>
-    </main>
-
-    <footer>
-        <a href="https://arena.ai/code" target="_blank" rel="noopener noreferrer">
-            Built with Arena<br>
-            Content is user-generated and unverified
-        </a>
-    </footer>
-
+  <!-- 배경 광원 -->
+  <div class="bg-glow"></div>
+  <!-- 본문 컨테이너 -->
+  <div class="container" id="container">
+    <!-- CI 로고마크 -->
+    <svg class="logo" viewBox="0 0 60 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- M 외곽 -->
+      <path d="M4 44 L4 8 L30 34 L56 8 L56 44"
+            stroke="#FF6B00" stroke-width="5"
+            stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <!-- V 내부 -->
+      <path d="M14 18 L30 36 L46 18"
+            stroke="#e65300" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+    </svg>
+    <!-- 구분선 -->
+    <div class="divider"></div>
+    <!-- 404 숫자 -->
+    <p class="error-code">404</p>
+    <!-- 메인 메시지 (한글) -->
+    <h1 class="title-ko">페이지를 찾을 수 없습니다</h1>
+    <!-- 영문 서브타이틀 -->
+    <p class="title-en">The page you requested could not be found.</p>
+    <!-- 서브 메시지 -->
+    <p class="subtitle">요청하신 페이지가 삭제되었거나 주소가 변경되었을 수 있습니다.</p>
+    <!-- 홈으로 버튼 -->
+    <a href="/" class="btn-home">홈으로 돌아가기</a>
+  </div>
+  <!-- 하단 워터마크 -->
+  <p class="watermark" id="watermark">ERROR · 404 · NOT FOUND</p>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      setTimeout(function () {
+        document.getElementById('container').classList.add('visible');
+        document.getElementById('watermark').classList.add('visible');
+      }, 50);
+    });
+  </script>
 </body>
 </html>
