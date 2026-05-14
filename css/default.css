@@ -109,7 +109,7 @@ img {
 	top: 0;
 	width: 33.1rem;
 	height: 36.7rem;
-	background-image: url("https://www.lh.or.kr/main/img/intro/bg_left.png");
+	background-image: url("./images/bg_left.png");
 }
 
 .promotion::after {
@@ -117,7 +117,7 @@ img {
 	bottom: 0;
 	width: 23.7rem;
 	height: 35.8rem;
-	background-image: url("https://www.lh.or.kr/main/img/intro/bg_right.png");
+	background-image: url("./images/bg_right.png");
 }
 
 .container {
